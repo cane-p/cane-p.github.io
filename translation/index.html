@@ -27,35 +27,9 @@
 
     <!-- Language Selection -->
     <div class="language-selection">
-      <select id="fromLanguage" class="language-select">
-        <option value="ar">Arabic</option>
-        <option value="zh">Chinese</option>
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="hi">Hindi</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-        <option value="es">Spanish</option>
-      </select>
+      <select id="fromLanguage" class="language-select"></select>
       <button id="flipLanguages" class="flip-btn">⇄</button>
-      <select id="toLanguage" class="language-select">
-        <option value="ar">Arabic</option>
-        <option value="zh">Chinese</option>
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="hi">Hindi</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-        <option value="es">Spanish</option>
-      </select>
+      <select id="toLanguage" class="language-select"></select>
     </div>
 
     <!-- Source Text Input -->
@@ -65,6 +39,7 @@
         <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" min="1">
         <button id="divideTextBtn">Divide Text</button>
       </div>
+      <p id="charCount">Character count: 0</p>
     </div>
 
     <!-- Translation Chunks -->
@@ -81,8 +56,16 @@
       <textarea id="combinedTranslation" placeholder="Combined translation will appear here..." readonly></textarea>
       <div class="action-buttons">
         <button id="copyCombinedBtn">Copy Combined</button>
+        <button id="exportPdfBtn">Export PDF</button>
+        <button id="exportTxtBtn">Export TXT</button>
         <button id="resetBtn">Reset</button>
       </div>
+    </div>
+
+    <!-- Translation History -->
+    <div class="history-section">
+      <h2>Translation History</h2>
+      <ul id="historyList"></ul>
     </div>
   </div>
 </body>
