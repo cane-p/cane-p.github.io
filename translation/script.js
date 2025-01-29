@@ -19,6 +19,40 @@ flipLanguagesBtn.addEventListener('click', () => {
   toLanguage.value = temp;
 });
 
+// Translation Services
+const serviceButtons = document.querySelectorAll('.service-btn');
+
+serviceButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const service = button.getAttribute('data-service');
+    const text = document.getElementById('sourceText').value;
+    const fromLang = fromLanguage.value;
+    const toLang = toLanguage.value;
+
+    let url = '';
+
+    switch (service) {
+      case 'google':
+        url = `https://translate.google.com/?sl=${fromLang}&tl=${toLang}&text=${encodeURIComponent(text)}`;
+        break;
+      case 'deepl':
+        url = `https://www.deepl.com/translator#${fromLang}/${toLang}/${encodeURIComponent(text)}`;
+        break;
+      case 'reverso':
+        url = `https://www.reverso.net/text-translation#sl=${fromLang}&tl=${toLang}&text=${encodeURIComponent(text)}`;
+        break;
+      case 'bing':
+        url = `https://www.bing.com/translator?from=${fromLang}&to=${toLang}&text=${encodeURIComponent(text)}`;
+        break;
+      default:
+        console.error('Unknown service');
+        return;
+    }
+
+    window.open(url, '_blank');
+  });
+});
+
 // Divide Text
 const sourceText = document.getElementById('sourceText');
 const charLimitInput = document.getElementById('charLimit');
