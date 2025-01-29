@@ -6,12 +6,46 @@ const body = document.body;
 darkModeToggle.addEventListener('click', () => {
   body.classList.toggle('dark-mode');
   darkModeIcon.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
 });
+
+// Load Dark Mode Preference
+if (localStorage.getItem('darkMode') === 'true') {
+  body.classList.add('dark-mode');
+  darkModeIcon.textContent = '☀️';
+}
 
 // Language Selection
 const fromLanguage = document.getElementById('fromLanguage');
 const toLanguage = document.getElementById('toLanguage');
 const flipLanguagesBtn = document.getElementById('flipLanguages');
+
+const languages = [
+  { code: 'ar', name: 'Arabic' },
+  { code: 'zh', name: 'Chinese' },
+  { code: 'en', name: 'English' },
+  { code: 'fr', name: 'French' },
+  { code: 'de', name: 'German' },
+  { code: 'hi', name: 'Hindi' },
+  { code: 'it', name: 'Italian' },
+  { code: 'ja', name: 'Japanese' },
+  { code: 'ko', name: 'Korean' },
+  { code: 'pt', name: 'Portuguese' },
+  { code: 'ru', name: 'Russian' },
+  { code: 'es', name: 'Spanish' },
+];
+
+languages.forEach((lang) => {
+  const option1 = document.createElement('option');
+  option1.value = lang.code;
+  option1.textContent = lang.name;
+  fromLanguage.appendChild(option1);
+
+  const option2 = document.createElement('option');
+  option2.value = lang.code;
+  option2.textContent = lang.name;
+  toLanguage.appendChild(option2);
+});
 
 flipLanguagesBtn.addEventListener('click', () => {
   const temp = fromLanguage.value;
