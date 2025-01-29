@@ -35,17 +35,26 @@ const languages = [
   { code: 'es', name: 'Spanish' },
 ];
 
-languages.forEach((lang) => {
-  const option1 = document.createElement('option');
-  option1.value = lang.code;
-  option1.textContent = lang.name;
-  fromLanguage.appendChild(option1);
+// Populate Language Dropdowns
+function populateLanguages() {
+  languages.forEach((lang) => {
+    const option1 = document.createElement('option');
+    option1.value = lang.code;
+    option1.textContent = lang.name;
+    fromLanguage.appendChild(option1);
 
-  const option2 = document.createElement('option');
-  option2.value = lang.code;
-  option2.textContent = lang.name;
-  toLanguage.appendChild(option2);
-});
+    const option2 = document.createElement('option');
+    option2.value = lang.code;
+    option2.textContent = lang.name;
+    toLanguage.appendChild(option2);
+  });
+
+  // Set default languages
+  fromLanguage.value = 'fr'; // French
+  toLanguage.value = 'en'; // English
+}
+
+populateLanguages(); // Call this function to populate the dropdowns
 
 flipLanguagesBtn.addEventListener('click', () => {
   const temp = fromLanguage.value;
@@ -140,4 +149,31 @@ resetBtn.addEventListener('click', () => {
   charLimitInput.value = '';
   chunksContainer.innerHTML = '';
   combinedTranslation.value = '';
+});
+
+// Export as PDF
+const exportPdfBtn = document.getElementById('exportPdfBtn');
+exportPdfBtn.addEventListener('click', () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text(combinedTranslation.value, 10, 10);
+  doc.save('translation.pdf');
+});
+
+// Export as TXT
+const exportTxtBtn = document.getElementById('exportTxtBtn');
+exportTxtBtn.addEventListener('click', () => {
+  const blob = new Blob([combinedTranslation.value], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'translation.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+// Character Count
+sourceText.addEventListener('input', () => {
+  const charCount = document.getElementById('charCount');
+  charCount.textContent = `Character count: ${sourceText.value.length}`;
 });
