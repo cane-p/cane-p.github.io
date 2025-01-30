@@ -24,19 +24,21 @@ document.getElementById('loginBtn').addEventListener('click', () => {
 
   if (username === savedUsername && password === savedPassword) {
     alert('Log-in successful! Redirecting...');
-    window.location.href = 'app.html'; // Redirect to the translation assistant page
+    window.location.href = 'app.html'; // Redirect to translation page
   } else {
     alert('Invalid username or password.');
   }
 });
 
-// Toggle between Sign-Up and Log-In forms
-document.getElementById('showLogin').addEventListener('click', () => {
+// Toggle Forms
+document.getElementById('showLogin').addEventListener('click', (e) => {
+  e.preventDefault();
   document.getElementById('signupForm').style.display = 'none';
   document.getElementById('loginForm').style.display = 'block';
 });
 
-document.getElementById('showSignup').addEventListener('click', () => {
+document.getElementById('showSignup').addEventListener('click', (e) => {
+  e.preventDefault();
   document.getElementById('loginForm').style.display = 'none';
   document.getElementById('signupForm').style.display = 'block';
 });
