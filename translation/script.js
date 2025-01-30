@@ -118,6 +118,7 @@ document.getElementById('combineBtn').addEventListener('click', () => {
   // Save to history
   saveTranslation(document.getElementById('sourceText').value, translations);
   updateProgress();
+  updateFinalCharCount();
 });
 
 // Save Translation History
@@ -187,8 +188,13 @@ document.getElementById('sourceText').addEventListener('input', (e) => {
 });
 
 document.getElementById('combinedTranslation').addEventListener('input', (e) => {
-  document.getElementById('finalCharCount').textContent = `Character count: ${e.target.value.length}`;
+  updateFinalCharCount();
 });
+
+function updateFinalCharCount() {
+  const finalCharCount = document.getElementById('combinedTranslation').value.length;
+  document.getElementById('finalCharCount').textContent = `Character count: ${finalCharCount}`;
+}
 
 // Speech-to-Text
 let isRecording = false;
@@ -259,6 +265,15 @@ if (!('speechSynthesis' in window)) {
 if (localStorage.getItem('isLoggedIn') !== 'true') {
   window.location.href = 'index.html';
 }
+
+document.querySelector('.header').insertAdjacentHTML('beforeend', 
+  `<button id="logoutBtn" style="margin-left: auto;">Logout</button>`
+);
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('isLoggedIn');
+  window.location.href = 'index.html';
+});
 
 // Copy Combined Translation (Modern Clipboard API)
 document.getElementById('copyCombinedBtn').addEventListener('click', async () => {
