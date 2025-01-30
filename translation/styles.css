@@ -363,8 +363,8 @@ textarea {
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 15px; /* Adjusted to sit perfectly in the bottom right corner */
+  right: 15px; /* Adjusted to sit perfectly in the bottom right corner */
 }
 
 #startRecording:hover {
