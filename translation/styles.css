@@ -287,6 +287,20 @@ textarea {
   margin-bottom: 10px;
 }
 
+.history-buttons button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.history-buttons button:hover {
+  background-color: #2563eb;
+}
+
 /* Auth Forms */
 .auth-form {
   display: flex;
