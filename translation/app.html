@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js" defer></script>
+  <script src="history.js" defer></script>
+</head>
+<body class="dark:bg-gray-900 dark:text-gray-100">
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="title">Translation Assistant</h1>
+      <button id="darkModeToggle" class="dark-mode-toggle">
+        <span id="darkModeIcon">🌙</span> Dark Mode
+      </button>
+    </header>
+
+    <!-- Translation Services -->
+    <div class="services-grid">
+      <button class="service-btn" data-service="google">Google Translate</button>
+      <button class="service-btn" data-service="deepl">DeepL</button>
+      <button class="service-btn" data-service="reverso">Reverso</button>
+      <button class="service-btn" data-service="bing">Bing Translator</button>
+    </div>
+
+    <!-- Language Selection -->
+    <div class="language-selection">
+      <select id="fromLanguage" class="language-select"></select>
+      <button id="flipLanguages" class="flip-btn">⇄</button>
+      <select id="toLanguage" class="language-select"></select>
+    </div>
+
+    <!-- Source Text Input -->
+    <div class="input-section">
+      <textarea id="sourceText" placeholder="Enter text to translate..."></textarea>
+      <div class="char-limit">
+        <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" min="1">
+        <button id="divideTextBtn">Divide Text</button>
+      </div>
+      <p id="sourceCharCount">Character count: 0</p>
+    </div>
+
+    <!-- Translation Chunks -->
+    <div id="chunksContainer" class="chunks-container"></div>
+
+    <!-- Progress Circle -->
+    <div id="progressCircle" class="progress-circle">
+      <span id="progressText">0%</span>
+    </div>
+
+    <!-- Combined Translation -->
+    <div class="combine-section">
+      <button id="combineBtn">Combine Translations</button>
+      <textarea id="combinedTranslation" placeholder="Combined translation will appear here..." readonly></textarea>
+      <p id="finalCharCount">Character count: 0</p>
+      <div class="action-buttons">
+        <button id="copyCombinedBtn">Copy Combined</button>
+        <button id="exportPdfBtn">Export PDF</button>
+        <button id="exportTxtBtn">Export TXT</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <!-- Translation History -->
+    <div class="history-section">
+      <h2>Translation History</h2>
+      <ul id="historyList"></ul>
+    </div>
+  </div>
+</body>
+</html>
