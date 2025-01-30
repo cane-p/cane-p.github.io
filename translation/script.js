@@ -273,15 +273,17 @@ function updateProgress() {
 function addTextToSpeechForChunks() {
   document.querySelectorAll('.chunk-box').forEach((chunkBox, index) => {
     const translationBox = chunkBox.querySelector('.translation-box');
-    const playAudioChunkBtn = document.createElement('button');
-    playAudioChunkBtn.classList.add('playAudioChunk');
-    playAudioChunkBtn.textContent = '🔊';
-    chunkBox.appendChild(playAudioChunkBtn);
+    if (!chunkBox.querySelector('.playAudioChunk')) {
+      const playAudioChunkBtn = document.createElement('button');
+      playAudioChunkBtn.classList.add('playAudioChunk');
+      playAudioChunkBtn.textContent = '🔊';
+      chunkBox.appendChild(playAudioChunkBtn);
 
-    playAudioChunkBtn.addEventListener('click', () => {
-      const utterance = new SpeechSynthesisUtterance(translationBox.value);
-      speechSynthesis.speak(utterance);
-    });
+      playAudioChunkBtn.addEventListener('click', () => {
+        const utterance = new SpeechSynthesisUtterance(translationBox.value);
+        speechSynthesis.speak(utterance);
+      });
+    }
   });
 }
 
@@ -301,3 +303,43 @@ playAudioCombinedBtn.addEventListener('click', () => {
   const utterance = new SpeechSynthesisUtterance(document.getElementById('combinedTranslation').value);
   speechSynthesis.speak(utterance);
 });
+
+// Logout Button
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.setItem('isLoggedIn', 'false');
+  window.location.href = 'index.html';
+});
+
+// Speech-to-Text
+let isRecording = false;
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+const startRecordingBtn = document.getElementById('startRecording');
+const sourceText = document.getElementById('sourceText');
+
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onresult = (event) => {
+  const transcript = Array.from(event.results)
+    .map((result) => result[0].transcript)
+    .join('');
+  sourceText.value = transcript;
+};
+
+startRecordingBtn.addEventListener('click', () => {
+  if (!isRecording) {
+    recognition.start();
+    startRecordingBtn.style.color = 'red';
+    isRecording = true;
+  } else {
+    recognition.stop();
+    startRecordingBtn.style.color = 'black';
+    isRecording = false;
+  }
+});
+
+// Check browser support for Speech-to-Text
+if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
+  startRecordingBtn.style.display = 'none';
+  alert("Speech-to-Text is not supported in your browser.");
+}
