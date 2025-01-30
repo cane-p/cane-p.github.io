@@ -320,7 +320,7 @@ function deleteHistoryItem(timestamp) {
   history = history.filter(item => item.timestamp !== timestamp);
   localStorage.setItem('translationHistory', JSON.stringify(history));
   displayHistory();
-});
+}
 
 // Update Progress
 function updateProgress() {
