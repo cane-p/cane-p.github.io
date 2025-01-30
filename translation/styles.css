@@ -204,6 +204,7 @@ textarea {
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 10px; /* Add margin to separate from the textarea */
+  width: 100%; /* Make button as wide as possible */
 }
 
 .combine-section button:hover {
