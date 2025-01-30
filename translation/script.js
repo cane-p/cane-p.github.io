@@ -302,8 +302,13 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 // Toggle Translation History Visibility
 document.getElementById('toggleHistoryBtn').addEventListener('click', () => {
   const historySection = document.querySelector('.history-section');
-  historySection.classList.toggle('hidden');
-  document.getElementById('toggleHistoryBtn').textContent = historySection.classList.contains('hidden') ? 'Show History' : 'Hide History';
+  if (historySection.style.display === 'none') {
+    historySection.style.display = 'block';
+    document.getElementById('toggleHistoryBtn').textContent = 'Hide History';
+  } else {
+    historySection.style.display = 'none';
+    document.getElementById('toggleHistoryBtn').textContent = 'Show History';
+  }
 });
 
 // Delete Translation History
