@@ -684,3 +684,45 @@ body.dark-mode .history-section li {
   background-color: #374151;
   color: #f9fafb;
 }
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #000000; /* Pure black background */
+  color: #ffffff;
+}
+
+body.dark-mode .translation-container {
+  background-color: #000000; /* Pure black container */
+  color: #ffffff;
+}
+
+/* History boxes remain white with black text in dark mode */
+body.dark-mode .history-section li {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #e5e7eb;
+}
+
+/* Other dark mode elements */
+body.dark-mode textarea,
+body.dark-mode input,
+body.dark-mode .chunk-box,
+body.dark-mode .language-select {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-color: #333333;
+}
+
+body.dark-mode .service-btn,
+body.dark-mode .flip-btn,
+body.dark-mode .char-limit button,
+body.dark-mode .action-buttons button {
+  background-color: #333333;
+  color: white;
+}
+
+body.dark-mode .service-btn:hover,
+body.dark-mode .flip-btn:hover,
+body.dark-mode .char-limit button:hover,
+body.dark-mode .action-buttons button:hover {
+  background-color: #444444;
+}
