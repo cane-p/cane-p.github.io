@@ -1,23 +1,3 @@
-// Dark Mode Toggle
-const darkModeToggle = document.getElementById('darkModeToggle');
-const darkModeIcon = document.getElementById('darkModeIcon');
-const body = document.body;
-
-darkModeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark-mode');
-  const isDarkMode = body.classList.contains('dark-mode');
-  darkModeIcon.textContent = isDarkMode ? '☀️' : '🌙';
-  darkModeToggle.textContent = isDarkMode ? ' Light Mode' : ' Dark Mode';
-  localStorage.setItem('darkMode', isDarkMode);
-});
-
-// Load Dark Mode Preference
-if (localStorage.getItem('darkMode') === 'true') {
-  body.classList.add('dark-mode');
-  darkModeIcon.textContent = '☀️';
-  darkModeToggle.textContent = ' Light Mode';
-}
-
 // Language Selection
 const fromLanguage = document.getElementById('fromLanguage');
 const toLanguage = document.getElementById('toLanguage');
