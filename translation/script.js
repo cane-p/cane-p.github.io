@@ -272,3 +272,33 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.removeItem('isLoggedIn');
   window.location.href = 'index.html';
 });
+
+// Copy Combined Translation (Modern Clipboard API)
+document.getElementById('copyCombinedBtn').addEventListener('click', async () => {
+  const text = document.getElementById('combinedTranslation').value;
+  try {
+    await navigator.clipboard.writeText(text);
+    alert('Copied to clipboard!');
+  } catch (err) {
+    alert('Failed to copy!');
+  }
+});
+
+// Reset Everything Properly
+document.getElementById('resetBtn').addEventListener('click', () => {
+  // Clear inputs
+  document.getElementById('sourceText').value = '';
+  document.getElementById('charLimit').value = '';
+  document.getElementById('combinedTranslation').value = '';
+  
+  // Clear chunks
+  document.getElementById('chunksContainer').innerHTML = '';
+  
+  // Reset counters and progress
+  document.getElementById('sourceCharCount').textContent = 'Character count: 0';
+  document.getElementById('finalCharCount').textContent = 'Character count: 0';
+  document.getElementById('progressText').textContent = '0%';
+  
+  // Reset progress circle color
+  document.getElementById('progressCircle').style.backgroundColor = '#3b82f6';
+});
