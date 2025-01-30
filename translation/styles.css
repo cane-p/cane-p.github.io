@@ -1,16 +1,28 @@
+/* Root Variables */
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --background: #f9fafb;
+  --text: #111827;
+  --card-bg: #ffffff;
+  --dark-bg: #111827;
+  --dark-text: #f9fafb;
+  --dark-card: #1f2937;
+}
+
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9fafb;
-  color: #111827;
+  background-color: var(--background);
+  color: var(--text);
   margin: 0;
   padding: 20px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 body.dark-mode {
-  background-color: #111827;
-  color: #f9fafb;
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
 }
 
 .container {
@@ -29,11 +41,11 @@ body.dark-mode {
 .title {
   font-size: 2rem;
   font-weight: bold;
-  color: #3b82f6;
+  color: var(--primary);
 }
 
 .dark-mode-toggle {
-  background-color: #3b82f6;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 8px 16px;
@@ -83,7 +95,7 @@ body.dark-mode {
 }
 
 .flip-btn {
-  background-color: #3b82f6;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 10px;
@@ -136,7 +148,7 @@ textarea {
 }
 
 .char-limit button {
-  background-color: #3b82f6;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -179,7 +191,7 @@ textarea {
   right: 20px;
   width: 80px;
   height: 80px;
-  background-color: #3b82f6;
+  background-color: var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -206,7 +218,7 @@ textarea {
 
 .action-buttons button {
   flex: 1;
-  background-color: #3b82f6;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 10px;
@@ -240,33 +252,95 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* Dark Mode Styles */
-body.dark-mode .auth-form,
+/* Auth Page Styles */
+.auth-page {
+  background: linear-gradient(135deg, var(--primary), #60a5fa);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+}
+
+.auth-card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+  text-align: center;
+  color: var(--primary);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.input-group label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card-bg);
+  padding: 0 0.5rem;
+  color: #6b7280;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+  top: 0;
+  font-size: 0.875rem;
+  color: var(--primary);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-button:hover {
+  background: var(--primary-hover);
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .auth-card,
 body.dark-mode .chunk-box,
 body.dark-mode .language-select,
 body.dark-mode textarea,
 body.dark-mode input {
-  background-color: #1f2937;
-  color: #f9fafb;
+  background-color: var(--dark-card);
+  color: var(--dark-text);
   border-color: #374151;
-}
-
-body.dark-mode .service-btn,
-body.dark-mode .flip-btn,
-body.dark-mode .char-limit button,
-body.dark-mode .action-buttons button {
-  background-color: #3b82f6;
-  color: white;
-}
-
-body.dark-mode .service-btn:hover,
-body.dark-mode .flip-btn:hover,
-body.dark-mode .char-limit button:hover,
-body.dark-mode .action-buttons button:hover {
-  background-color: #2563eb;
-}
-
-body.dark-mode .history-section li {
-  background-color: #374151;
-  color: #f9fafb;
 }
