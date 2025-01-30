@@ -130,6 +130,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center; /* Center the chunk boxes */
 }
 
 .chunk-box {
@@ -137,6 +138,25 @@ textarea {
   border-radius: 8px;
   padding: 20px;
   background-color: white;
+  width: 100%; /* Ensure chunk boxes take full width */
+  max-width: 800px; /* Limit the maximum width */
+}
+
+/* Copy and Paste Buttons */
+.chunk-box .copy-btn,
+.chunk-box .paste-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.chunk-box .copy-btn:hover,
+.chunk-box .paste-btn:hover {
+  background-color: #2563eb;
 }
 
 /* Progress Circle */
