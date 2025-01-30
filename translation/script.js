@@ -153,6 +153,7 @@ document.getElementById('combineBtn').addEventListener('click', () => {
 // Save Translation History
 function saveTranslation(sourceText, translation) {
   const history = JSON.parse(localStorage.getItem('translationHistory') || '[]');
+  if (!sourceText || !translation) return; // Fix the translation glitch
   history.push({
     sourceText,
     translation,
@@ -298,11 +299,15 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 // Toggle Translation History Visibility
 document.getElementById('toggleHistoryBtn').addEventListener('click', () => {
   const historySection = document.querySelector('.history-section');
-  if (historySection.style.display === 'none') {
-    historySection.style.display = 'block';
+  const historyList = document.getElementById('historyList');
+  const historyTitle = document.getElementById('historyTitle');
+  if (historyList.style.display === 'none') {
+    historyList.style.display = 'block';
+    historyTitle.style.display = 'block';
     document.getElementById('toggleHistoryBtn').textContent = 'Hide History';
   } else {
-    historySection.style.display = 'none';
+    historyList.style.display = 'none';
+    historyTitle.style.display = 'none';
     document.getElementById('toggleHistoryBtn').textContent = 'Show History';
   }
 });
