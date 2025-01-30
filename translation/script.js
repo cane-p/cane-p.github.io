@@ -221,8 +221,27 @@ document.getElementById('playCombinedAudio').addEventListener('click', () => {
   speakText(text, targetLang);
 });
 
-// Check browser support
-if (!('speechSynthesis' in window)) {
-  document.querySelectorAll('.play-audio').forEach(btn => btn.style.display = 'none');
-  alert("Text-to-Speech is not supported in your browser.");
-}
+// Speech-to-Text
+let isRecording = false;
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+const startRecordingBtn = document.getElementById('startRecording');
+const sourceText = document.getElementById('sourceText');
+
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onresult = (event) => {
+  const transcript = Array.from(event.results)
+    .map((result) => result[0].transcript)
+    .join('');
+  sourceText.value = transcript;
+};
+
+startRecordingBtn.addEventListener('click', () => {
+  if (!isRecording) {
+    recognition.start();
+    startRecordingBtn.style.color = 'red';
+    isRecording = true;
+  } else {
+    recognition.stop();
+    start
