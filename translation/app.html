@@ -9,88 +9,69 @@
   <script src="script.js" defer></script>
 </head>
 <body class="dark:bg-gray-900 dark:text-gray-100">
-  <div class="main-container">
+  <div class="container">
     <!-- Header -->
-    <header class="main-header">
-      <h1 class="app-title">Translation Assistant</h1>
-      <div class="header-controls">
-        <button id="darkModeToggle" class="dark-mode-toggle">
-          <span id="darkModeIcon">🌙</span> 
-        </button>
-      </div>
+    <header class="header">
+      <h1 class="title">Translation Assistant</h1>
+      <button id="darkModeToggle" class="dark-mode-toggle">
+        <span id="darkModeIcon">🌙</span> Dark Mode
+      </button>
     </header>
 
     <!-- Translation Services -->
     <div class="services-grid">
-      <button class="service-btn" data-service="google">
-        <span>Google Translate</span>
-        <svg class="service-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.18 5 4.05 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-      </button>
-      <!-- Repeat for other services with appropriate SVGs -->
+      <button class="service-btn" data-service="google">Google Translate</button>
+      <button class="service-btn" data-service="deepl">DeepL</button>
+      <button class="service-btn" data-service="reverso">Reverso</button>
+      <button class="service-btn" data-service="bing">Bing Translator</button>
     </div>
 
     <!-- Language Selection -->
-    <div class="language-section">
-      <div class="language-picker">
-        <select id="fromLanguage" class="language-select"></select>
-        <button id="flipLanguages" class="flip-btn">⇄</button>
-        <select id="toLanguage" class="language-select"></select>
-      </div>
+    <div class="language-selection">
+      <select id="fromLanguage" class="language-select"></select>
+      <button id="flipLanguages" class="flip-btn">⇄</button>
+      <select id="toLanguage" class="language-select"></select>
     </div>
 
     <!-- Source Text Input -->
     <div class="input-section">
-      <div class="voice-input-wrapper">
-        <textarea id="sourceText" placeholder="Enter text to translate..." class="fancy-textarea"></textarea>
+      <div class="voice-input">
+        <textarea id="sourceText" placeholder="Enter text to translate..."></textarea>
         <button id="startRecording" class="voice-btn">🎤</button>
       </div>
-      <div class="controls-row">
-        <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" class="char-limit-input">
-        <button id="divideTextBtn" class="primary-btn">Divide Text</button>
+      <div class="char-limit">
+        <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" min="1">
+        <button id="divideTextBtn">Divide Text</button>
       </div>
-      <div class="char-count">
-        <span id="sourceCharCount">0 characters</span>
-      </div>
+      <p id="sourceCharCount">Character count: 0</p>
     </div>
 
     <!-- Translation Chunks -->
-    <div id="chunksContainer" class="chunks-grid"></div>
+    <div id="chunksContainer" class="chunks-container"></div>
 
-    <!-- Progress Indicator -->
-    <div class="progress-indicator">
-      <div class="progress-circle">
-        <span id="progressText">0%</span>
-      </div>
+    <!-- Progress Circle -->
+    <div id="progressCircle" class="progress-circle">
+      <span id="progressText">0%</span>
     </div>
 
     <!-- Combined Translation -->
-    <div class="output-section">
-      <button id="combineBtn" class="primary-btn">Combine Translations</button>
-      <div class="output-wrapper">
-        <textarea id="combinedTranslation" placeholder="Combined translation will appear here..." class="fancy-textarea"></textarea>
-        <div class="output-controls">
-          <button id="copyCombinedBtn" class="icon-btn" title="Copy">
-            <svg class="icon"><path d="M19 21H8V7h11m0-2H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m-3-4H4c-1.1 0-2 .9-2 2v14h2V3h12V1z"/></svg>
-          </button>
-          <button id="playCombinedAudio" class="icon-btn" title="Play">
-            <svg class="icon"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-        </div>
-      </div>
+    <div class="combine-section">
+      <button id="combineBtn">Combine Translations</button>
+      <textarea id="combinedTranslation" placeholder="Combined translation will appear here..." readonly></textarea>
+      <button id="playCombinedAudio" class="play-audio">🔊</button>
+      <p id="finalCharCount">Character count: 0</p>
       <div class="action-buttons">
-        <button id="exportPdfBtn" class="secondary-btn">Export PDF</button>
-        <button id="exportTxtBtn" class="secondary-btn">Export TXT</button>
-        <button id="resetBtn" class="danger-btn">Reset All</button>
-      </div>
-      <div class="char-count">
-        <span id="finalCharCount">0 characters</span>
+        <button id="copyCombinedBtn">Copy Combined</button>
+        <button id="exportPdfBtn">Export PDF</button>
+        <button id="exportTxtBtn">Export TXT</button>
+        <button id="resetBtn">Reset</button>
       </div>
     </div>
 
-    <!-- History Section -->
+    <!-- Translation History -->
     <div class="history-section">
-      <h2 class="section-title">Translation History</h2>
-      <div class="history-list" id="historyList"></div>
+      <h2>Translation History</h2>
+      <ul id="historyList"></ul>
     </div>
   </div>
 </body>
