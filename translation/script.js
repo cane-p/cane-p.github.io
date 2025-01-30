@@ -258,35 +258,7 @@ if (!('speechSynthesis' in window)) {
   document.querySelectorAll('.play-audio').forEach(btn => btn.style.display = 'none');
   alert("Text-to-Speech is not supported in your browser.");
 }
-// Add these fixes to your existing script.js
 
-// Copy Combined Translation
-document.getElementById('copyCombinedBtn').addEventListener('click', () => {
-  const textarea = document.getElementById('combinedTranslation');
-  textarea.select();
-  document.execCommand('copy');
-  alert('Copied to clipboard!');
-});
-
-// Reset Everything
-document.getElementById('resetBtn').addEventListener('click', () => {
-  // Clear inputs
-  document.getElementById('sourceText').value = '';
-  document.getElementById('charLimit').value = '';
-  document.getElementById('combinedTranslation').value = '';
-  
-  // Clear chunks
-  document.getElementById('chunksContainer').innerHTML = '';
-  
-  // Reset counters
-  document.getElementById('sourceCharCount').textContent = 'Character count: 0';
-  document.getElementById('finalCharCount').textContent = 'Character count: 0';
-  
-  // Reset progress
-  document.getElementById('progressText').textContent = '0%';
-});
-
-// Add this at the end of your existing script.js
 // Session management
 if (localStorage.getItem('isLoggedIn') !== 'true') {
   window.location.href = 'index.html';
