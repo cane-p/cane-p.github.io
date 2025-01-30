@@ -1,11 +1,10 @@
 // Sign-Up
 document.getElementById('signupBtn').addEventListener('click', () => {
-  const username = document.getElementById('signupUsername').value;
-  const password = document.getElementById('signupPassword').value;
+  const username = document.getElementById('signupUsername').value.trim();
+  const password = document.getElementById('signupPassword').value.trim();
 
   if (username && password) {
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
+    localStorage.setItem('translationUser', JSON.stringify({ username, password }));
     alert('Sign-up successful! Please log in.');
     document.getElementById('signupForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
@@ -16,17 +15,16 @@ document.getElementById('signupBtn').addEventListener('click', () => {
 
 // Log-In
 document.getElementById('loginBtn').addEventListener('click', () => {
-  const username = document.getElementById('loginUsername').value;
-  const password = document.getElementById('loginPassword').value;
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
 
-  const savedUsername = localStorage.getItem('username');
-  const savedPassword = localStorage.getItem('password');
+  const savedUser = JSON.parse(localStorage.getItem('translationUser'));
 
-  if (username === savedUsername && password === savedPassword) {
-    alert('Log-in successful! Redirecting...');
-    window.location.href = 'app.html'; // Redirect to translation page
+  if (savedUser && username === savedUser.username && password === savedUser.password) {
+    localStorage.setItem('isLoggedIn', 'true');
+    window.location.href = 'app.html';
   } else {
-    alert('Invalid username or password.');
+    alert('Invalid credentials');
   }
 });
 
@@ -42,3 +40,8 @@ document.getElementById('showSignup').addEventListener('click', (e) => {
   document.getElementById('loginForm').style.display = 'none';
   document.getElementById('signupForm').style.display = 'block';
 });
+
+// Auto-redirect if logged in
+if (localStorage.getItem('isLoggedIn') === 'true') {
+  window.location.href = 'app.html';
+}
