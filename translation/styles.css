@@ -92,7 +92,8 @@ body {
 /* Source Text Input */
 .input-section {
   margin-bottom: 20px;
-  max-width: 800px; /* Ensure initial text box has the same width */
+  width: 100%; /* Ensure initial text box is as wide as possible */
+  max-width: 1200px; /* Limit the maximum width */
   margin-left: auto;
   margin-right: auto;
 }
@@ -141,8 +142,8 @@ textarea {
   border-radius: 8px;
   padding: 20px;
   background-color: white;
-  width: 100%; /* Ensure chunk boxes take full width */
-  max-width: 800px; /* Limit the maximum width */
+  width: 100%; /* Ensure chunk boxes are as wide as possible */
+  max-width: 1200px; /* Limit the maximum width */
 }
 
 /* Copy and Paste Buttons */
@@ -181,7 +182,8 @@ textarea {
 /* Combined Translation */
 .combine-section {
   margin-top: 20px;
-  max-width: 800px; /* Ensure combined translation box has the same width */
+  width: 100%; /* Ensure combined translation box is as wide as possible */
+  max-width: 1200px; /* Limit the maximum width */
   margin-left: auto;
   margin-right: auto;
 }
