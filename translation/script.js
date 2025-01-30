@@ -198,20 +198,26 @@ document.getElementById('exportPdfBtn').addEventListener('click', () => {
   const originalText = document.getElementById('sourceText').value;
   const translatedText = document.getElementById('combinedTranslation').value;
 
+  doc.setFont("times", "bold");
   doc.setFontSize(16);
-  doc.setFont("helvetica", "bold");
   doc.text("Original Text", 10, 10);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("times", "normal");
   doc.setFontSize(12);
   doc.text(originalText, 10, 20, { maxWidth: 180 });
 
-  doc.addPage();
+  let pageHeight = doc.internal.pageSize.height;
+  let y = doc.lastAutoTable.finalY + 10;
+  if (y + 10 > pageHeight) {
+    doc.addPage();
+    y = 10;
+  }
+
+  doc.setFont("times", "bold");
   doc.setFontSize(16);
-  doc.setFont("helvetica", "bold");
-  doc.text("Translated Text", 10, 10);
-  doc.setFont("helvetica", "normal");
+  doc.text("Translated Text", 10, y);
+  doc.setFont("times", "normal");
   doc.setFontSize(12);
-  doc.text(translatedText, 10, 20, { maxWidth: 180 });
+  doc.text(translatedText, 10, y + 10, { maxWidth: 180 });
 
   doc.save('translation.pdf');
 });
