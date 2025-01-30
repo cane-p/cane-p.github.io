@@ -44,6 +44,56 @@ body.dark-mode {
   gap: 8px;
 }
 
+/* Auth Forms */
+.auth-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.auth-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-form button:hover {
+  background-color: #2563eb;
+}
+
+.auth-form p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.auth-form a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
 /* Translation Services */
 .services-grid {
   display: grid;
@@ -216,4 +266,35 @@ textarea {
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 10px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode .auth-form,
+body.dark-mode .chunk-box,
+body.dark-mode .language-select,
+body.dark-mode textarea,
+body.dark-mode input {
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+body.dark-mode .service-btn,
+body.dark-mode .flip-btn,
+body.dark-mode .char-limit button,
+body.dark-mode .action-buttons button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .service-btn:hover,
+body.dark-mode .flip-btn:hover,
+body.dark-mode .char-limit button:hover,
+body.dark-mode .action-buttons button:hover {
+  background-color: #2563eb;
+}
+
+body.dark-mode .history-section li {
+  background-color: #374151;
+  color: #f9fafb;
 }
