@@ -30,6 +30,7 @@ body.dark-mode {
   font-size: 2rem;
   font-weight: bold;
   color: #3b82f6;
+  margin: 0; /* Remove default margin */
 }
 
 .dark-mode-toggle {
@@ -42,6 +43,7 @@ body.dark-mode {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: auto; /* Push to the right */
 }
 
 /* Translation Services */
