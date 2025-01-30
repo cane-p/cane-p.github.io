@@ -99,15 +99,12 @@ document.getElementById('divideTextBtn').addEventListener('click', () => {
       <div class="chunk-box">
         <textarea readonly>${chunk}</textarea>
         <textarea placeholder="Enter translation..." class="translation-box"></textarea>
-        <!-- Remove the play-audio button -->
-        <!-- <button class="play-audio" data-text="${chunk}">🔊</button> -->
       </div>
     `
     )
     .join('');
 
   updateProgress();
-  addTextToSpeechForChunks();
 });
 
 // Combine Translations
@@ -268,41 +265,6 @@ function updateProgress() {
   document.getElementById('progressText').textContent = `${progress}%`;
   document.getElementById('progressCircle').style.backgroundColor = progress === 100 ? '#10b981' : '#3b82f6';
 }
-
-// Text-to-Speech for Translation Chunks
-function addTextToSpeechForChunks() {
-  document.querySelectorAll('.chunk-box').forEach((chunkBox, index) => {
-    const translationBox = chunkBox.querySelector('.translation-box');
-    if (!chunkBox.querySelector('.playAudioChunk')) {
-      const playAudioChunkBtn = document.createElement('button');
-      playAudioChunkBtn.classList.add('playAudioChunk');
-      playAudioChunkBtn.textContent = '🔊';
-      chunkBox.appendChild(playAudioChunkBtn);
-
-      playAudioChunkBtn.addEventListener('click', () => {
-        const utterance = new SpeechSynthesisUtterance(translationBox.value);
-        speechSynthesis.speak(utterance);
-      });
-    }
-  });
-}
-
-// Call this function after dividing text into chunks
-document.getElementById('divideTextBtn').addEventListener('click', () => {
-  // ...existing code...
-  addTextToSpeechForChunks();
-});
-
-// Text-to-Speech for Combined Translation
-const playAudioCombinedBtn = document.createElement('button');
-playAudioCombinedBtn.id = 'playAudioCombined';
-playAudioCombinedBtn.textContent = '🔊';
-document.querySelector('.combine-section').appendChild(playAudioCombinedBtn);
-
-playAudioCombinedBtn.addEventListener('click', () => {
-  const utterance = new SpeechSynthesisUtterance(document.getElementById('combinedTranslation').value);
-  speechSynthesis.speak(utterance);
-});
 
 // Logout Button
 document.getElementById('logoutBtn').addEventListener('click', () => {
