@@ -5,14 +5,17 @@ const body = document.body;
 
 darkModeToggle.addEventListener('click', () => {
   body.classList.toggle('dark-mode');
-  darkModeIcon.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
-  localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+  const isDarkMode = body.classList.contains('dark-mode');
+  darkModeIcon.textContent = isDarkMode ? '☀️' : '🌙';
+  darkModeToggle.textContent = isDarkMode ? ' Light Mode' : ' Dark Mode';
+  localStorage.setItem('darkMode', isDarkMode);
 });
 
 // Load Dark Mode Preference
 if (localStorage.getItem('darkMode') === 'true') {
   body.classList.add('dark-mode');
   darkModeIcon.textContent = '☀️';
+  darkModeToggle.textContent = ' Light Mode';
 }
 
 // Language Selection
