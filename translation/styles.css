@@ -1,3 +1,318 @@
+/* Root Variables */
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --background: #f9fafb;
+  --text: #111827;
+  --card-bg: #ffffff;
+  --dark-bg: #111827;
+  --dark-text: #f9fafb;
+  --dark-card: #1f2937;
+  --error: #ef4444;
+  --error-hover: #dc2626;
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, var(--background), #e5e7eb);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Translation Services */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.service-btn {
+  background-color: #e5e7eb;
+  border: 1px solid #d1d5db;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.service-btn:hover {
+  background-color: #d1d5db;
+}
+
+/* Language Selection */
+.language-selection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.language-select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.flip-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text Input */
+.input-section {
+  margin-bottom: 20px;
+}
+
+.voice-input {
+  position: relative;
+}
+
+.voice-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.char-limit {
+  display: flex;
+  gap: 10px;
+}
+
+.char-limit input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.char-limit button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Translation Chunks */
+.chunks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chunk-box {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+}
+
+.chunk-box textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.play-audio {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Progress Circle */
+.progress-circle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* Combined Translation */
+.combine-section {
+  margin-top: 20px;
+}
+
+.combine-section textarea {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  flex: 1;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.action-buttons button#resetBtn {
+  background-color: var(--error);
+}
+
+.action-buttons button#resetBtn:hover {
+  background-color: var(--error-hover);
+}
+
+/* Translation History */
+.history-section {
+  margin-top: 20px;
+}
+
+.history-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+}
+
+#historyList li {
+  background-color: #e5e7eb;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Auth Forms */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.auth-form input:focus {
+  border-color: var(--primary);
+}
+
+.auth-form button {
+  padding: 12px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-form button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Dark Mode Fixes */
+body.dark-mode .container,
+body.dark-mode .chunk-box,
+body.dark-mode .language-select,
+body.dark-mode textarea,
+body.dark-mode input {
+  background-color: var(--dark-card);
+  color: var(--dark-text);
+  border-color: #374151;
+}
+
 body.dark-mode .service-btn,
 body.dark-mode .flip-btn,
 body.dark-mode .char-limit button,
@@ -13,20 +328,22 @@ body.dark-mode .action-buttons button:hover {
   background-color: #2563eb;
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-  background-color: #000000; /* Pure black background */
-  color: #ffffff;
-}
-
-body.dark-mode .translation-container {
-  background-color: #000000; /* Pure black container */
-  color: #ffffff;
-}
-
-/* History boxes remain white with black text in dark mode */
 body.dark-mode .history-section li {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 1px solid #e5e7eb;
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+/* Translation Page Container */
+.translation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%; /* Ensure it takes up most of the screen */
+}
+
+@media (max-width: 768px) {
+  .translation-container {
+    width: 100%;
+    padding: 10px;
+  }
 }
