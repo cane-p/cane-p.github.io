@@ -104,6 +104,8 @@ document.getElementById('divideTextBtn').addEventListener('click', () => {
     `
     )
     .join('');
+
+  updateProgress();
 });
 
 // Combine Translations
@@ -115,6 +117,7 @@ document.getElementById('combineBtn').addEventListener('click', () => {
   
   // Save to history
   saveTranslation(document.getElementById('sourceText').value, translations);
+  updateProgress();
 });
 
 // Save Translation History
@@ -285,3 +288,13 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   // Reset progress circle color
   document.getElementById('progressCircle').style.backgroundColor = '#3b82f6';
 });
+
+// Update Progress
+function updateProgress() {
+  const totalChunks = document.querySelectorAll('.chunk-box').length;
+  const translatedChunks = Array.from(document.querySelectorAll('.translation-box')).filter(textarea => textarea.value.trim() !== '').length;
+  const progress = totalChunks === 0 ? 0 : Math.round((translatedChunks / totalChunks) * 100);
+
+  document.getElementById('progressText').textContent = `${progress}%`;
+  document.getElementById('progressCircle').style.backgroundColor = progress === 100 ? '#10b981' : '#3b82f6';
+}
