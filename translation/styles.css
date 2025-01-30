@@ -270,3 +270,16 @@ body.dark-mode .history-section li {
   background-color: #374151;
   color: #f9fafb;
 }
+/* Previous CSS remains unchanged, add these fixes */
+.action-buttons button#resetBtn {
+  background-color: #ef4444 !important;
+}
+
+.action-buttons button#resetBtn:hover {
+  background-color: #dc2626 !important;
+}
+
+.play-audio {
+  margin-left: 10px;
+  vertical-align: middle;
+}
