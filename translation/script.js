@@ -143,10 +143,19 @@ function displayHistory() {
         <strong>${entry.timestamp}</strong><br>
         <strong>Source:</strong> ${entry.sourceText}<br>
         <strong>Translation:</strong> ${entry.translation}
+        <button class="delete-history-item" data-timestamp="${entry.timestamp}">Delete</button>
       </li>
     `
     )
     .join('');
+
+  // Add event listeners to delete buttons
+  document.querySelectorAll('.delete-history-item').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const timestamp = e.target.getAttribute('data-timestamp');
+      deleteHistoryItem(timestamp);
+    });
+  });
 }
 
 // Load History on Page Load
@@ -288,6 +297,27 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   // Reset progress circle color
   document.getElementById('progressCircle').style.backgroundColor = '#3b82f6';
 });
+
+// Toggle Translation History Visibility
+document.getElementById('toggleHistoryBtn').addEventListener('click', () => {
+  const historySection = document.querySelector('.history-section');
+  historySection.style.display = historySection.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('toggleHistoryBtn').textContent = historySection.style.display === 'none' ? 'Show History' : 'Hide History';
+});
+
+// Delete Translation History
+document.getElementById('resetHistoryBtn').addEventListener('click', () => {
+  localStorage.removeItem('translationHistory');
+  displayHistory();
+});
+
+// Delete individual history item
+function deleteHistoryItem(timestamp) {
+  let history = JSON.parse(localStorage.getItem('translationHistory') || '[]');
+  history = history.filter(item => item.timestamp !== timestamp);
+  localStorage.setItem('translationHistory', JSON.stringify(history));
+  displayHistory();
+}
 
 // Update Progress
 function updateProgress() {
