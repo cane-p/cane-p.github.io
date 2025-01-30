@@ -260,15 +260,6 @@ if (localStorage.getItem('isLoggedIn') !== 'true') {
   window.location.href = 'index.html';
 }
 
-document.querySelector('.header').insertAdjacentHTML('beforeend', 
-  `<button id="logoutBtn" style="margin-left: auto;">Logout</button>`
-);
-
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  localStorage.removeItem('isLoggedIn');
-  window.location.href = 'index.html';
-});
-
 // Copy Combined Translation (Modern Clipboard API)
 document.getElementById('copyCombinedBtn').addEventListener('click', async () => {
   const text = document.getElementById('combinedTranslation').value;
