@@ -107,7 +107,7 @@ document.getElementById('divideTextBtn').addEventListener('click', () => {
     .join('');
 
   updateProgress();
-  addSpeechToTextForChunks();
+  addTextToSpeechForChunks();
 });
 
 // Combine Translations
@@ -198,40 +198,6 @@ function updateFinalCharCount() {
   document.getElementById('finalCharCount').textContent = `Character count: ${finalCharCount}`;
 }
 
-// Speech-to-Text
-let isRecording = false;
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-const startRecordingBtn = document.getElementById('startRecording');
-const sourceText = document.getElementById('sourceText');
-
-recognition.continuous = true;
-recognition.interimResults = true;
-
-recognition.onresult = (event) => {
-  const transcript = Array.from(event.results)
-    .map((result) => result[0].transcript)
-    .join('');
-  sourceText.value = transcript;
-};
-
-startRecordingBtn.addEventListener('click', () => {
-  if (!isRecording) {
-    recognition.start();
-    startRecordingBtn.style.color = 'red';
-    isRecording = true;
-  } else {
-    recognition.stop();
-    startRecordingBtn.style.color = 'black';
-    isRecording = false;
-  }
-});
-
-// Check browser support for Speech-to-Text
-if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
-  startRecordingBtn.style.display = 'none';
-  alert("Speech-to-Text is not supported in your browser.");
-}
-
 // Session management
 if (localStorage.getItem('isLoggedIn') !== 'true') {
   window.location.href = 'index.html';
@@ -303,67 +269,35 @@ function updateProgress() {
   document.getElementById('progressCircle').style.backgroundColor = progress === 100 ? '#10b981' : '#3b82f6';
 }
 
-// Speech-to-Text for Translation Chunks
-function addSpeechToTextForChunks() {
+// Text-to-Speech for Translation Chunks
+function addTextToSpeechForChunks() {
   document.querySelectorAll('.chunk-box').forEach((chunkBox, index) => {
     const translationBox = chunkBox.querySelector('.translation-box');
-    const startRecordingChunkBtn = document.createElement('button');
-    startRecordingChunkBtn.classList.add('startRecordingChunk');
-    startRecordingChunkBtn.textContent = '🎤';
-    chunkBox.appendChild(startRecordingChunkBtn);
+    const playAudioChunkBtn = document.createElement('button');
+    playAudioChunkBtn.classList.add('playAudioChunk');
+    playAudioChunkBtn.textContent = '🔊';
+    chunkBox.appendChild(playAudioChunkBtn);
 
-    let isRecordingChunk = false;
-    const recognitionChunk = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognitionChunk.continuous = true;
-    recognitionChunk.interimResults = true;
-
-    recognitionChunk.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0].transcript)
-        .join('');
-      translationBox.value = transcript;
-    };
-
-    startRecordingChunkBtn.addEventListener('click', () => {
-      if (!isRecordingChunk) {
-        recognitionChunk.start();
-        startRecordingChunkBtn.style.color = 'red';
-        isRecordingChunk = true;
-      } else {
-        recognitionChunk.stop();
-        startRecordingChunkBtn.style.color = 'black';
-        isRecordingChunk = false;
-      }
+    playAudioChunkBtn.addEventListener('click', () => {
+      const utterance = new SpeechSynthesisUtterance(translationBox.value);
+      speechSynthesis.speak(utterance);
     });
   });
 }
 
-// Speech-to-Text for Combined Translation
-const startRecordingCombinedBtn = document.createElement('button');
-startRecordingCombinedBtn.id = 'startRecordingCombined';
-startRecordingCombinedBtn.textContent = '🎤';
-document.querySelector('.combine-section').appendChild(startRecordingCombinedBtn);
+// Call this function after dividing text into chunks
+document.getElementById('divideTextBtn').addEventListener('click', () => {
+  // ...existing code...
+  addTextToSpeechForChunks();
+});
 
-let isRecordingCombined = false;
-const recognitionCombined = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognitionCombined.continuous = true;
-recognitionCombined.interimResults = true;
+// Text-to-Speech for Combined Translation
+const playAudioCombinedBtn = document.createElement('button');
+playAudioCombinedBtn.id = 'playAudioCombined';
+playAudioCombinedBtn.textContent = '🔊';
+document.querySelector('.combine-section').appendChild(playAudioCombinedBtn);
 
-recognitionCombined.onresult = (event) => {
-  const transcript = Array.from(event.results)
-    .map((result) => result[0].transcript)
-    .join('');
-  document.getElementById('combinedTranslation').value = transcript;
-};
-
-startRecordingCombinedBtn.addEventListener('click', () => {
-  if (!isRecordingCombined) {
-    recognitionCombined.start();
-    startRecordingCombinedBtn.style.color = 'red';
-    isRecordingCombined = true;
-  } else {
-    recognitionCombined.stop();
-    startRecordingCombinedBtn.style.color = 'black';
-    isRecordingCombined = false;
-  }
+playAudioCombinedBtn.addEventListener('click', () => {
+  const utterance = new SpeechSynthesisUtterance(document.getElementById('combinedTranslation').value);
+  speechSynthesis.speak(utterance);
 });
