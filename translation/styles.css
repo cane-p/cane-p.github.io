@@ -178,6 +178,9 @@ textarea {
 /* Combined Translation */
 .combine-section {
   margin-top: 20px;
+  max-width: 800px; /* Ensure combined translation box has the same width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .combine-section textarea {
