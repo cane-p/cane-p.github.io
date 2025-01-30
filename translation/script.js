@@ -171,8 +171,8 @@ function displayHistory() {
       (entry) => `
       <li>
         <strong>${entry.timestamp}</strong><br>
-        <strong>Source:</strong> ${entry.sourceText}<br>
-        <strong>Translation:</strong> ${entry.translation}
+        <span><strong>Source:</strong> ${entry.sourceText}</span><br>
+        <span><strong>Translation:</strong> ${entry.translation}</span>
         <button class="delete-history-item" data-timestamp="${entry.timestamp}">Delete</button>
       </li>
     `
