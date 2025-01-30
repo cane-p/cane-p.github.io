@@ -15,6 +15,36 @@ if (localStorage.getItem('darkMode') === 'true') {
   darkModeIcon.textContent = '☀️';
 }
 
+// Fixed Copy Combined Function
+document.getElementById('copyCombinedBtn').addEventListener('click', () => {
+  const text = document.getElementById('combinedTranslation').value;
+  navigator.clipboard.writeText(text)
+    .then(() => alert('Copied to clipboard!'))
+    .catch(err => console.error('Failed to copy:', err));
+});
+
+// Fixed Reset Function
+document.getElementById('resetBtn').addEventListener('click', () => {
+  // Clear all inputs
+  document.getElementById('sourceText').value = '';
+  document.getElementById('charLimit').value = '';
+  document.getElementById('combinedTranslation').value = '';
+  
+  // Clear chunks
+  document.getElementById('chunksContainer').innerHTML = '';
+  
+  // Reset progress
+  document.getElementById('progressText').textContent = '0%';
+  document.querySelector('.progress-circle').style.background = 'conic-gradient(var(--primary) 0%, #e5e7eb 0%)';
+  
+  // Reset character counts
+  document.getElementById('sourceCharCount').textContent = '0 characters';
+  document.getElementById('finalCharCount').textContent = '0 characters';
+  
+  // Clear history display (but keep storage)
+  document.getElementById('historyList').innerHTML = '';
+});
+
 // Language Selection
 const fromLanguage = document.getElementById('fromLanguage');
 const toLanguage = document.getElementById('toLanguage');
