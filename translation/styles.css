@@ -1,78 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Translation Assistant</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="script.js" defer></script>
-</head>
-<body class="dark:bg-gray-900 dark:text-gray-100">
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <h1 class="title">Translation Assistant</h1>
-      <button id="darkModeToggle" class="dark-mode-toggle">
-        <span id="darkModeIcon">🌙</span> Dark Mode
-      </button>
-    </header>
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  margin: 0;
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
 
-    <!-- Translation Services -->
-    <div class="services-grid">
-      <button class="service-btn" data-service="google">Google Translate</button>
-      <button class="service-btn" data-service="deepl">DeepL</button>
-      <button class="service-btn" data-service="reverso">Reverso</button>
-      <button class="service-btn" data-service="bing">Bing Translator</button>
-    </div>
+body.dark-mode {
+  background-color: #111827;
+  color: #f9fafb;
+}
 
-    <!-- Language Selection -->
-    <div class="language-selection">
-      <select id="fromLanguage" class="language-select"></select>
-      <button id="flipLanguages" class="flip-btn">⇄</button>
-      <select id="toLanguage" class="language-select"></select>
-    </div>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-    <!-- Source Text Input -->
-    <div class="input-section">
-      <div class="voice-input">
-        <textarea id="sourceText" placeholder="Enter text to translate..."></textarea>
-        <button id="startRecording" class="voice-btn">🎤</button>
-      </div>
-      <div class="char-limit">
-        <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" min="1">
-        <button id="divideTextBtn">Divide Text</button>
-      </div>
-      <p id="sourceCharCount">Character count: 0</p>
-    </div>
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-    <!-- Translation Chunks -->
-    <div id="chunksContainer" class="chunks-container"></div>
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3b82f6;
+}
 
-    <!-- Progress Circle -->
-    <div id="progressCircle" class="progress-circle">
-      <span id="progressText">0%</span>
-    </div>
+.dark-mode-toggle {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-    <!-- Combined Translation -->
-    <div class="combine-section">
-      <button id="combineBtn">Combine Translations</button>
-      <textarea id="combinedTranslation" placeholder="Combined translation will appear here..." readonly></textarea>
-      <button id="playCombinedAudio" class="play-audio">🔊</button>
-      <p id="finalCharCount">Character count: 0</p>
-      <div class="action-buttons">
-        <button id="copyCombinedBtn">Copy Combined</button>
-        <button id="exportPdfBtn">Export PDF</button>
-        <button id="exportTxtBtn">Export TXT</button>
-        <button id="resetBtn">Reset</button>
-      </div>
-    </div>
+/* Translation Services */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-    <!-- Translation History -->
-    <div class="history-section">
-      <h2>Translation History</h2>
-      <ul id="historyList"></ul>
-    </div>
-  </div>
-</body>
-</html>
+.service-btn {
+  background-color: #e5e7eb;
+  border: 1px solid #d1d5db;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.service-btn:hover {
+  background-color: #d1d5db;
+}
+
+/* Language Selection */
+.language-selection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.language-select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.flip-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Source Text Input */
+.input-section {
+  margin-bottom: 20px;
+}
+
+.voice-input {
+  position: relative;
+}
+
+.voice-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.char-limit {
+  display: flex;
+  gap: 10px;
+}
+
+.char-limit input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.char-limit button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Translation Chunks */
+.chunks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chunk-box {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+}
+
+.chunk-box textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.play-audio {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Progress Circle */
+.progress-circle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* Combined Translation */
+.combine-section {
+  margin-top: 20px;
+}
+
+.combine-section textarea {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  flex: 1;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.action-buttons button:last-child {
+  background-color: #ef4444;
+}
+
+/* Translation History */
+.history-section {
+  margin-top: 20px;
+}
+
+.history-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+}
+
+#historyList li {
+  background-color: #e5e7eb;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode .auth-form,
+body.dark-mode .chunk-box,
+body.dark-mode .language-select,
+body.dark-mode textarea,
+body.dark-mode input {
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+body.dark-mode .service-btn,
+body.dark-mode .flip-btn,
+body.dark-mode .char-limit button,
+body.dark-mode .action-buttons button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .service-btn:hover,
+body.dark-mode .flip-btn:hover,
+body.dark-mode .char-limit button:hover,
+body.dark-mode .action-buttons button:hover {
+  background-color: #2563eb;
+}
+
+body.dark-mode .history-section li {
+  background-color: #374151;
+  color: #f9fafb;
+}
