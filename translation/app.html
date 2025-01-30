@@ -35,12 +35,10 @@
 
     <!-- Source Text Input -->
     <div class="input-section">
-      <!-- Voice Input -->
       <div class="voice-input">
         <textarea id="sourceText" placeholder="Enter text to translate..."></textarea>
         <button id="startRecording" class="voice-btn">🎤</button>
       </div>
-      <!-- Rest of your input section -->
       <div class="char-limit">
         <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" min="1">
         <button id="divideTextBtn">Divide Text</button>
@@ -49,14 +47,7 @@
     </div>
 
     <!-- Translation Chunks -->
-    <div id="chunksContainer" class="chunks-container">
-      <!-- For each translation chunk -->
-      <div class="chunk-box">
-        <textarea readonly>${chunk}</textarea>
-        <textarea placeholder="Enter translation..." class="translation-box"></textarea>
-        <button class="play-audio" data-text="${chunk}">🔊</button>
-      </div>
-    </div>
+    <div id="chunksContainer" class="chunks-container"></div>
 
     <!-- Progress Circle -->
     <div id="progressCircle" class="progress-circle">
@@ -65,16 +56,16 @@
 
     <!-- Combined Translation -->
     <div class="combine-section">
+      <button id="combineBtn">Combine Translations</button>
       <textarea id="combinedTranslation" placeholder="Combined translation will appear here..." readonly></textarea>
       <button id="playCombinedAudio" class="play-audio">🔊</button>
-    </div>
-
-    <!-- Action Buttons for Combined Translation -->
-    <div class="action-buttons">
-      <button id="copyCombinedBtn">Copy Combined</button>
-      <button id="exportPdfBtn">Export PDF</button>
-      <button id="exportTxtBtn">Export TXT</button>
-      <button id="resetBtn">Reset</button>
+      <p id="finalCharCount">Character count: 0</p>
+      <div class="action-buttons">
+        <button id="copyCombinedBtn">Copy Combined</button>
+        <button id="exportPdfBtn">Export PDF</button>
+        <button id="exportTxtBtn">Export TXT</button>
+        <button id="resetBtn">Reset</button>
+      </div>
     </div>
 
     <!-- Translation History -->
