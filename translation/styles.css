@@ -111,6 +111,7 @@ textarea {
 .char-limit {
   display: flex;
   gap: 10px;
+  align-items: center; /* Align items to center */
 }
 
 .char-limit input {
@@ -124,9 +125,10 @@ textarea {
   background-color: #3b82f6;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px; /* Adjust padding to make the button smaller */
   border-radius: 8px;
   cursor: pointer;
+  flex: 1; /* Allow the button to take available space */
 }
 
 /* Translation Chunks */
@@ -365,9 +367,6 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  bottom: 20px; /* Adjusted to sit slightly up */
-  right: 5%; /* Adjusted to sit 95% to the right */
 }
 
 #startRecording:hover {
