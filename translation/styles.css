@@ -237,6 +237,9 @@ textarea {
 /* Translation History */
 .history-section {
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .history-section h2 {
@@ -282,20 +285,6 @@ textarea {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
-}
-
-.history-buttons button {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.history-buttons button:hover {
-  background-color: #2563eb;
 }
 
 /* Auth Forms */
