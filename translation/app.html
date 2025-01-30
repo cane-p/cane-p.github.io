@@ -33,9 +33,9 @@
 
     <!-- Source Text Input -->
     <div class="input-section">
-      <div class="voice-input">
-        <button id="startRecording">🎤</button>
+      <div class="voice-input" style="position: relative;">
         <textarea id="sourceText" placeholder="Enter text to translate..."></textarea>
+        <button id="startRecording" style="position: absolute; bottom: 10px; right: 10px;">🎤</button>
       </div>
       <div class="char-limit">
         <input type="number" id="charLimit" placeholder="Character limit (default: 2000)" min="1">
