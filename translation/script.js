@@ -203,21 +203,33 @@ document.getElementById('exportPdfBtn').addEventListener('click', () => {
   doc.text("Original Text", 10, 10);
   doc.setFont("times", "normal");
   doc.setFontSize(12);
-  doc.text(originalText, 10, 20, { maxWidth: 180, align: "left" });
+  let lines = doc.splitTextToSize(originalText, 180);
+  let y = 20;
+  lines.forEach(line => {
+    if (y > 280) { // Check if we need to add a new page
+      doc.addPage();
+      y = 10;
+    }
+    doc.text(line, 10, y);
+    y += 10;
+  });
 
-  let pageHeight = doc.internal.pageSize.height;
-  let y = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 30;
-  if (y + 10 > pageHeight) {
-    doc.addPage();
-    y = 10;
-  }
-
+  doc.addPage();
   doc.setFont("times", "bold");
   doc.setFontSize(16);
-  doc.text("Translated Text", 10, y);
+  doc.text("Translated Text", 10, 10);
   doc.setFont("times", "normal");
   doc.setFontSize(12);
-  doc.text(translatedText, 10, y + 10, { maxWidth: 180, align: "left" });
+  lines = doc.splitTextToSize(translatedText, 180);
+  y = 20;
+  lines.forEach(line => {
+    if (y > 280) { // Check if we need to add a new page
+      doc.addPage();
+      y = 10;
+    }
+    doc.text(line, 10, y);
+    y += 10;
+  });
 
   doc.save('translation.pdf');
 });
