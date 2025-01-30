@@ -336,24 +336,6 @@ textarea {
   background-color: #2563eb;
 }
 
-/* New Speech-to-Text Buttons for Translation Chunks */
-.translation-box + .startRecordingChunk {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 5px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5px;
-}
-
-.translation-box + .startRecordingChunk:hover {
-  background-color: #2563eb;
-}
-
 /* New Text-to-Speech Buttons for Translation Chunks */
 .translation-box + .playAudioChunk {
   background-color: #3b82f6;
