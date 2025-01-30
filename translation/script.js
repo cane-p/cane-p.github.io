@@ -99,13 +99,43 @@ document.getElementById('divideTextBtn').addEventListener('click', () => {
       <div class="chunk-box">
         <textarea readonly>${chunk}</textarea>
         <textarea placeholder="Enter translation..." class="translation-box"></textarea>
+        <button class="copy-btn">Copy</button>
+        <button class="paste-btn">Paste</button>
       </div>
     `
     )
     .join('');
 
   updateProgress();
+  addCopyPasteFunctionality();
 });
+
+// Add Copy and Paste Functionality
+function addCopyPasteFunctionality() {
+  document.querySelectorAll('.chunk-box').forEach((chunkBox) => {
+    const copyBtn = chunkBox.querySelector('.copy-btn');
+    const pasteBtn = chunkBox.querySelector('.paste-btn');
+    const translationBox = chunkBox.querySelector('.translation-box');
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(translationBox.value);
+        alert('Copied to clipboard!');
+      } catch (err) {
+        alert('Failed to copy!');
+      }
+    });
+
+    pasteBtn.addEventListener('click', async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        translationBox.value = text;
+      } catch (err) {
+        alert('Failed to paste!');
+      }
+    });
+  });
+}
 
 // Combine Translations
 document.getElementById('combineBtn').addEventListener('click', () => {
@@ -165,7 +195,9 @@ displayHistory();
 document.getElementById('exportPdfBtn').addEventListener('click', () => {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  doc.text(document.getElementById('combinedTranslation').value, 10, 10);
+  const originalText = document.getElementById('sourceText').value;
+  const translatedText = document.getElementById('combinedTranslation').value;
+  doc.text(`Original Text:\n${originalText}\n\nTranslated Text:\n${translatedText}`, 10, 10);
   doc.save('translation.pdf');
 });
 
