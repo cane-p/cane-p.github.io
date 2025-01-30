@@ -194,6 +194,20 @@ textarea {
   margin-bottom: 10px;
 }
 
+.combine-section button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.combine-section button:hover {
+  background-color: #2563eb;
+}
+
 .action-buttons {
   display: flex;
   gap: 10px;
