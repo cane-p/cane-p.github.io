@@ -92,6 +92,9 @@ body {
 /* Source Text Input */
 .input-section {
   margin-bottom: 20px;
+  max-width: 800px; /* Ensure initial text box has the same width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 textarea {
