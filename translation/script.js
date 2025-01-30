@@ -197,7 +197,22 @@ document.getElementById('exportPdfBtn').addEventListener('click', () => {
   const doc = new jsPDF();
   const originalText = document.getElementById('sourceText').value;
   const translatedText = document.getElementById('combinedTranslation').value;
-  doc.text(`Original Text:\n${originalText}\n\nTranslated Text:\n${translatedText}`, 10, 10);
+
+  doc.setFontSize(16);
+  doc.setFont("helvetica", "bold");
+  doc.text("Original Text", 10, 10);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+  doc.text(originalText, 10, 20, { maxWidth: 180 });
+
+  doc.addPage();
+  doc.setFontSize(16);
+  doc.setFont("helvetica", "bold");
+  doc.text("Translated Text", 10, 10);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+  doc.text(translatedText, 10, 20, { maxWidth: 180 });
+
   doc.save('translation.pdf');
 });
 
