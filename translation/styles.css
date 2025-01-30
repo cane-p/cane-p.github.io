@@ -5,9 +5,6 @@
   --background: #f9fafb;
   --text: #111827;
   --card-bg: #ffffff;
-  --dark-bg: #111827;
-  --dark-text: #f9fafb;
-  --dark-card: #1f2937;
   --error: #ef4444;
   --error-hover: #dc2626;
 }
@@ -24,11 +21,6 @@ body {
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s, color 0.3s;
-}
-
-body.dark-mode {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
 }
 
 /* Container */
@@ -52,20 +44,6 @@ body.dark-mode {
   font-weight: bold;
   color: var(--primary);
   margin: 0;
-}
-
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
 }
 
 /* Translation Services */
@@ -300,37 +278,6 @@ textarea {
 
 .auth-form button:hover {
   background-color: var(--primary-hover);
-}
-
-/* Dark Mode Fixes */
-body.dark-mode .container,
-body.dark-mode .chunk-box,
-body.dark-mode .language-select,
-body.dark-mode textarea,
-body.dark-mode input {
-  background-color: var(--dark-card);
-  color: var(--dark-text);
-  border-color: #374151;
-}
-
-body.dark-mode .service-btn,
-body.dark-mode .flip-btn,
-body.dark-mode .char-limit button,
-body.dark-mode .action-buttons button {
-  background-color: #3b82f6;
-  color: white;
-}
-
-body.dark-mode .service-btn:hover,
-body.dark-mode .flip-btn:hover,
-body.dark-mode .char-limit button:hover,
-body.dark-mode .action-buttons button:hover {
-  background-color: #2563eb;
-}
-
-body.dark-mode .history-section li {
-  background-color: #374151;
-  color: #f9fafb;
 }
 
 /* Translation Page Container */
