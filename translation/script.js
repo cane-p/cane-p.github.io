@@ -54,17 +54,15 @@ function populateLanguages() {
   toLanguage.value = 'en'; // English
 }
 
-// Initialize languages on page load
-populateLanguages();
+populateLanguages(); // Call this function to populate the dropdowns
 
-// Flip languages
 flipLanguagesBtn.addEventListener('click', () => {
   const temp = fromLanguage.value;
   fromLanguage.value = toLanguage.value;
   toLanguage.value = temp;
 });
 
-// Translation Services Redirect
+// Translation Services
 document.querySelectorAll('.service-btn').forEach((button) => {
   button.addEventListener('click', () => {
     const service = button.getAttribute('data-service');
@@ -197,6 +195,40 @@ document.getElementById('combinedTranslation').addEventListener('input', (e) => 
   document.getElementById('finalCharCount').textContent = `Character count: ${e.target.value.length}`;
 });
 
+// Speech-to-Text
+let isRecording = false;
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+const startRecordingBtn = document.getElementById('startRecording');
+const sourceText = document.getElementById('sourceText');
+
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onresult = (event) => {
+  const transcript = Array.from(event.results)
+    .map((result) => result[0].transcript)
+    .join('');
+  sourceText.value = transcript;
+};
+
+startRecordingBtn.addEventListener('click', () => {
+  if (!isRecording) {
+    recognition.start();
+    startRecordingBtn.style.color = 'red';
+    isRecording = true;
+  } else {
+    recognition.stop();
+    startRecordingBtn.style.color = 'black';
+    isRecording = false;
+  }
+});
+
+// Check browser support for Speech-to-Text
+if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
+  startRecordingBtn.style.display = 'none';
+  alert("Speech-to-Text is not supported in your browser.");
+}
+
 // Text-to-Speech
 function speakText(text, lang) {
   const synth = window.speechSynthesis;
@@ -221,27 +253,8 @@ document.getElementById('playCombinedAudio').addEventListener('click', () => {
   speakText(text, targetLang);
 });
 
-// Speech-to-Text
-let isRecording = false;
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-const startRecordingBtn = document.getElementById('startRecording');
-const sourceText = document.getElementById('sourceText');
-
-recognition.continuous = true;
-recognition.interimResults = true;
-
-recognition.onresult = (event) => {
-  const transcript = Array.from(event.results)
-    .map((result) => result[0].transcript)
-    .join('');
-  sourceText.value = transcript;
-};
-
-startRecordingBtn.addEventListener('click', () => {
-  if (!isRecording) {
-    recognition.start();
-    startRecordingBtn.style.color = 'red';
-    isRecording = true;
-  } else {
-    recognition.stop();
-    start
+// Check browser support for Text-to-Speech
+if (!('speechSynthesis' in window)) {
+  document.querySelectorAll('.play-audio').forEach(btn => btn.style.display = 'none');
+  alert("Text-to-Speech is not supported in your browser.");
+}
