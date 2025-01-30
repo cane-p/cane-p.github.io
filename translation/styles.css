@@ -125,10 +125,9 @@ textarea {
   background-color: #3b82f6;
   color: white;
   border: none;
-  padding: 10px 15px; /* Adjust padding to make the button smaller */
+  padding: 10px 15px; /* Adjust padding to make the button slightly smaller */
   border-radius: 8px;
   cursor: pointer;
-  flex: 1; /* Allow the button to take available space */
 }
 
 /* Translation Chunks */
@@ -361,7 +360,7 @@ textarea {
   background-color: #3b82f6;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 10px; /* Keep the old size */
   border-radius: 50%;
   cursor: pointer;
   display: flex;
