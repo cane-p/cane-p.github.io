@@ -213,4 +213,119 @@ startRecordingBtn.addEventListener('click', () => {
     isRecording = true;
   } else {
     recognition.stop();
-    startRecordingBtn.style.color
+    startRecordingBtn.style.color = 'black';
+    isRecording = false;
+  }
+});
+
+// Check browser support for Speech-to-Text
+if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
+  startRecordingBtn.style.display = 'none';
+  alert("Speech-to-Text is not supported in your browser.");
+}
+
+// Text-to-Speech
+function speakText(text, lang) {
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = lang; // Use the target language code (e.g., "en-US", "es-ES")
+  synth.cancel(); // Cancel any ongoing speech
+  synth.speak(utterance);
+}
+
+// Play audio for translation chunks
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('play-audio')) {
+    const text = e.target.getAttribute('data-text') || e.target.parentElement.querySelector('textarea').value;
+    const targetLang = document.getElementById('toLanguage').value;
+    speakText(text, targetLang);
+  }
+});
+
+// Play audio for combined translation
+document.getElementById('playCombinedAudio').addEventListener('click', () => {
+  const text = document.getElementById('combinedTranslation').value;
+  const targetLang = document.getElementById('toLanguage').value;
+  speakText(text, targetLang);
+});
+
+// Check browser support for Text-to-Speech
+if (!('speechSynthesis' in window)) {
+  document.querySelectorAll('.play-audio').forEach(btn => btn.style.display = 'none');
+  alert("Text-to-Speech is not supported in your browser.");
+}
+
+// Session management
+if (localStorage.getItem('isLoggedIn') !== 'true') {
+  window.location.href = 'index.html';
+}
+
+document.querySelector('.header').insertAdjacentHTML('beforeend', 
+  `<button id="logoutBtn" style="margin-left: auto;">Logout</button>`
+);
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('isLoggedIn');
+  window.location.href = 'index.html';
+});
+
+// Copy Combined Translation (Modern Clipboard API)
+document.getElementById('copyCombinedBtn').addEventListener('click', async () => {
+  const text = document.getElementById('combinedTranslation').value;
+  try {
+    await navigator.clipboard.writeText(text);
+    alert('Copied to clipboard!');
+  } catch (err) {
+    alert('Failed to copy!');
+  }
+});
+
+// Reset Everything Properly
+document.getElementById('resetBtn').addEventListener('click', () => {
+  // Clear inputs
+  document.getElementById('sourceText').value = '';
+  document.getElementById('charLimit').value = '';
+  document.getElementById('combinedTranslation').value = '';
+  
+  // Clear chunks
+  document.getElementById('chunksContainer').innerHTML = '';
+  
+  // Reset counters and progress
+  document.getElementById('sourceCharCount').textContent = 'Character count: 0';
+  document.getElementById('finalCharCount').textContent = 'Character count: 0';
+  document.getElementById('progressText').textContent = '0%';
+  
+  // Reset progress circle color
+  document.getElementById('progressCircle').style.backgroundColor = '#3b82f6';
+});
+
+// Toggle Translation History Visibility
+document.getElementById('toggleHistoryBtn').addEventListener('click', () => {
+  const historySection = document.querySelector('.history-section');
+  historySection.classList.toggle('hidden');
+  document.getElementById('toggleHistoryBtn').textContent = historySection.classList.contains('hidden') ? 'Show History' : 'Hide History';
+});
+
+// Delete Translation History
+document.getElementById('resetHistoryBtn').addEventListener('click', () => {
+  localStorage.removeItem('translationHistory');
+  displayHistory();
+});
+
+// Delete individual history item
+function deleteHistoryItem(timestamp) {
+  let history = JSON.parse(localStorage.getItem('translationHistory') || '[]');
+  history = history.filter(item => item.timestamp !== timestamp);
+  localStorage.setItem('translationHistory', JSON.stringify(history));
+  displayHistory();
+}
+
+// Update Progress
+function updateProgress() {
+  const totalChunks = document.querySelectorAll('.chunk-box').length;
+  const translatedChunks = Array.from(document.querySelectorAll('.translation-box')).filter(textarea => textarea.value.trim() !== '').length;
+  const progress = totalChunks === 0 ? 0 : Math.round((translatedChunks / totalChunks) * 100);
+
+  document.getElementById('progressText').textContent = `${progress}%`;
+  document.getElementById('progressCircle').style.backgroundColor = progress === 100 ? '#10b981' : '#3b82f6';
+}
