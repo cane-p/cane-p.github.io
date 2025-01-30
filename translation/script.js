@@ -107,6 +107,7 @@ document.getElementById('divideTextBtn').addEventListener('click', () => {
     .join('');
 
   updateProgress();
+  addSpeechToTextForChunks();
 });
 
 // Combine Translations
@@ -301,3 +302,68 @@ function updateProgress() {
   document.getElementById('progressText').textContent = `${progress}%`;
   document.getElementById('progressCircle').style.backgroundColor = progress === 100 ? '#10b981' : '#3b82f6';
 }
+
+// Speech-to-Text for Translation Chunks
+function addSpeechToTextForChunks() {
+  document.querySelectorAll('.chunk-box').forEach((chunkBox, index) => {
+    const translationBox = chunkBox.querySelector('.translation-box');
+    const startRecordingChunkBtn = document.createElement('button');
+    startRecordingChunkBtn.classList.add('startRecordingChunk');
+    startRecordingChunkBtn.textContent = '🎤';
+    chunkBox.appendChild(startRecordingChunkBtn);
+
+    let isRecordingChunk = false;
+    const recognitionChunk = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognitionChunk.continuous = true;
+    recognitionChunk.interimResults = true;
+
+    recognitionChunk.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0].transcript)
+        .join('');
+      translationBox.value = transcript;
+    };
+
+    startRecordingChunkBtn.addEventListener('click', () => {
+      if (!isRecordingChunk) {
+        recognitionChunk.start();
+        startRecordingChunkBtn.style.color = 'red';
+        isRecordingChunk = true;
+      } else {
+        recognitionChunk.stop();
+        startRecordingChunkBtn.style.color = 'black';
+        isRecordingChunk = false;
+      }
+    });
+  });
+}
+
+// Speech-to-Text for Combined Translation
+const startRecordingCombinedBtn = document.createElement('button');
+startRecordingCombinedBtn.id = 'startRecordingCombined';
+startRecordingCombinedBtn.textContent = '🎤';
+document.querySelector('.combine-section').appendChild(startRecordingCombinedBtn);
+
+let isRecordingCombined = false;
+const recognitionCombined = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+recognitionCombined.continuous = true;
+recognitionCombined.interimResults = true;
+
+recognitionCombined.onresult = (event) => {
+  const transcript = Array.from(event.results)
+    .map((result) => result[0].transcript)
+    .join('');
+  document.getElementById('combinedTranslation').value = transcript;
+};
+
+startRecordingCombinedBtn.addEventListener('click', () => {
+  if (!isRecordingCombined) {
+    recognitionCombined.start();
+    startRecordingCombinedBtn.style.color = 'red';
+    isRecordingCombined = true;
+  } else {
+    recognitionCombined.stop();
+    startRecordingCombinedBtn.style.color = 'black';
+    isRecordingCombined = false;
+  }
+});
