@@ -62,7 +62,7 @@ document.querySelectorAll('.service-btn').forEach((button) => {
         url = `https://www.deepl.com/translator#${fromLang}/${toLang}/${encodeURIComponent(text)}`;
         break;
       case 'reverso':
-        url = `https://www.reverso.net/text-translation#sl=${fromLang}&tl=${toLang}&text=${encodeURIComponent(text)}`;
+        url = `https://www.reverso.net/text-translation#${fromLang}/${toLang}/${encodeURIComponent(text)}`;
         break;
       case 'bing':
         url = `https://www.bing.com/translator?from=${fromLang}&to=${toLang}&text=${encodeURIComponent(text)}`;
