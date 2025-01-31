@@ -45,6 +45,65 @@ flipLanguagesBtn.addEventListener('click', () => {
   toLanguage.value = temp;
 });
 
+const languageMappings = {
+  google: {
+    ar: 'ar',
+    zh: 'zh-CN',
+    en: 'en',
+    fr: 'fr',
+    de: 'de',
+    hi: 'hi',
+    it: 'it',
+    ja: 'ja',
+    ko: 'ko',
+    pt: 'pt',
+    ru: 'ru',
+    es: 'es',
+  },
+  deepl: {
+    ar: 'ar',
+    zh: 'zh',
+    en: 'en',
+    fr: 'fr',
+    de: 'de',
+    hi: 'hi',
+    it: 'it',
+    ja: 'ja',
+    ko: 'ko',
+    pt: 'pt',
+    ru: 'ru',
+    es: 'es',
+  },
+  reverso: {
+    ar: 'ara',
+    zh: 'chi',
+    en: 'eng',
+    fr: 'fra',
+    de: 'ger',
+    hi: 'hin',
+    it: 'ita',
+    ja: 'jpn',
+    ko: 'kor',
+    pt: 'por',
+    ru: 'rus',
+    es: 'spa',
+  },
+  bing: {
+    ar: 'ar',
+    zh: 'zh-Hans',
+    en: 'en',
+    fr: 'fr',
+    de: 'de',
+    hi: 'hi',
+    it: 'it',
+    ja: 'ja',
+    ko: 'ko',
+    pt: 'pt',
+    ru: 'ru',
+    es: 'es',
+  },
+};
+
 // Translation Services
 document.querySelectorAll('.service-btn').forEach((button) => {
   button.addEventListener('click', () => {
@@ -53,19 +112,22 @@ document.querySelectorAll('.service-btn').forEach((button) => {
     const fromLang = fromLanguage.value;
     const toLang = toLanguage.value;
 
+    const fromLangMapped = languageMappings[service][fromLang];
+    const toLangMapped = languageMappings[service][toLang];
+
     let url = '';
     switch (service) {
       case 'google':
-        url = `https://translate.google.com/?sl=${fromLang}&tl=${toLang}&text=${encodeURIComponent(text)}`;
+        url = `https://translate.google.com/?sl=${fromLangMapped}&tl=${toLangMapped}&text=${encodeURIComponent(text)}`;
         break;
       case 'deepl':
-        url = `https://www.deepl.com/translator#${fromLang}/${toLang}/${encodeURIComponent(text)}`;
+        url = `https://www.deepl.com/translator#${fromLangMapped}/${toLangMapped}/${encodeURIComponent(text)}`;
         break;
       case 'reverso':
-        url = `https://www.reverso.net/text-translation#sl=${fromLang}&tl=${toLang}&text=${encodeURIComponent(text)}`;
+        url = `https://www.reverso.net/text-translation#sl=${fromLangMapped}&tl=${toLangMapped}&text=${encodeURIComponent(text)}`;
         break;
       case 'bing':
-        url = `https://www.bing.com/translator?from=${fromLang}&to=${toLang}&text=${encodeURIComponent(text)}`;
+        url = `https://www.bing.com/translator?from=${fromLangMapped}&to=${toLangMapped}&text=${encodeURIComponent(text)}`;
         break;
       default:
         console.error('Unknown service');
