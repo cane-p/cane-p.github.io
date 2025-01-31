@@ -62,7 +62,7 @@ const languageMappings = {
   },
   deepl: {
     ar: 'ar',
-    zh: 'zh',
+    zh: 'zh-hans',
     en: 'en',
     fr: 'fr',
     de: 'de',
