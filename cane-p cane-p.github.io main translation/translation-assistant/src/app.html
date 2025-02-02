@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="translation-container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="title">Translation Assistant</h1>
+      <button id="logoutBtn" style="margin-left: auto;">Logout</button>
+    </header>
+
+    <!-- Translation Services -->
+    <div class="services-grid">
+      <button class="service-btn" data-service="google">Google Translate</button>
+      <button class="service-btn" data-service="deepl">DeepL</button>
+      <button class="service-btn" data-service="reverso">Reverso</button>
+      <button class="service-btn" data-service="bing">Bing Translator</button>
+    </div>
+
+    <!-- Language Selection -->
+    <div class="language-selection">
+      <select id="fromLanguage" class="language-select"></select>
+      <button id="flipLanguages" class="flip-btn">⇄</button>
+      <select id="toLanguage" class="language-select"></select>
+    </div>
+
+    <!-- Source Text Input -->
+    <div class="input-section">
+      <div class="voice-input" style="position: relative;">
+        <!-- Additional input elements can be added here -->
+      </div>
+    </div>
+
+    <!-- VTT to Text Conversion Link -->
+    <div class="vtt-conversion">
+      <a href="vtt-to-text.html" class="vtt-conversion-link">Convert VTT to Text</a>
+    </div>
+  </div>
+</body>
+</html>
