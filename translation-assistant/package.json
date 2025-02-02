@@ -1,0 +1,24 @@
+{
+  "name": "translation-assistant",
+  "version": "1.0.0",
+  "description": "A web application for translating text and converting VTT files to normal text.",
+  "main": "src/script.js",
+  "scripts": {
+    "start": "live-server src",
+    "build": "tsc"
+  },
+  "keywords": [
+    "translation",
+    "vtt",
+    "text conversion",
+    "web application"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
