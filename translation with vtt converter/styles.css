@@ -1,0 +1,378 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  margin: 0;
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Translation Page Container */
+.translation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 90%; /* Ensure it takes up most of the screen */
+}
+
+@media (max-width: 768px) {
+  .translation-container {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3b82f6;
+  margin: 0;
+}
+
+/* Translation Services */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.service-btn {
+  background-color: #e5e7eb;
+  border: 1px solid #d1d5db;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.service-btn:hover {
+  background-color: #d1d5db;
+}
+
+/* Language Selection */
+.language-selection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.language-select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.flip-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Source Text Input */
+.input-section {
+  margin-bottom: 20px;
+  width: 100%; /* Ensure initial text box is as wide as possible */
+  max-width: 1200px; /* Limit the maximum width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.char-limit {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Align items to center */
+}
+
+.char-limit input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.char-limit button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 15px; /* Adjust padding to make the button slightly smaller */
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Translation Chunks */
+.chunks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center; /* Center the chunk boxes */
+}
+
+.chunk-box {
+  border: none; /* Remove the outline white box */
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  width: 100%; /* Ensure chunk boxes are as wide as possible */
+  max-width: 1200px; /* Limit the maximum width */
+}
+
+/* Copy and Paste Buttons */
+.chunk-box .copy-btn,
+.chunk-box .paste-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%; /* Make buttons as wide as possible */
+}
+
+.chunk-box .copy-btn:hover,
+.chunk-box .paste-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Progress Circle */
+.progress-circle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* Combined Translation */
+.combine-section {
+  margin-top: 20px;
+  width: 100%; /* Ensure combined translation box is as wide as possible */
+  max-width: 1200px; /* Limit the maximum width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.combine-section textarea {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.combine-section button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 10px; /* Add margin to separate from the textarea */
+  width: 100%; /* Make button as wide as possible */
+}
+
+.combine-section button:hover {
+  background-color: #2563eb;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  flex: 1;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.action-buttons button#resetBtn {
+  background-color: #ef4444;
+}
+
+.action-buttons button#resetBtn:hover {
+  background-color: #dc2626;
+}
+
+/* Translation History */
+.history-section {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+}
+
+#historyList li {
+  background-color: #e5e7eb;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; /* Ensure text wraps to a new line */
+  gap: 10px;
+}
+
+#historyList li strong,
+#historyList li span {
+  word-wrap: break-word; /* Ensure long words break to a new line */
+}
+
+#historyList li button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#historyList li button:hover {
+  background-color: #dc2626;
+}
+
+/* History Buttons */
+.history-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.history-buttons button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.history-buttons button:hover {
+  background-color: #2563eb;
+}
+
+/* Auth Forms */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.auth-form input:focus {
+  border-color: #3b82f6;
+}
+
+.auth-form button {
+  padding: 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-form button:hover {
+  background-color: #2563eb;
+}
+
+/* Logout Button */
+#logoutBtn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+#logoutBtn:hover {
+  background-color: #2563eb;
+}
+
+/* Speech-to-Text Button */
+#startRecording {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px; /* Keep the old size */
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#startRecording:hover {
+  background-color: #2563eb;
+}
+
+/* Remove New Text-to-Speech Buttons for Translation Chunks */
+.translation-box + .playAudioChunk {
+  display: none;
+}

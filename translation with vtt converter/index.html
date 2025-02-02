@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation Assistant - Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="auth.js"></script>
+  <script src="vttConverter.js"></script>
+</head>
+<body>
+  <div class="login-container"> <!-- Changed from "container" -->
+    <header class="header">
+      <h1 class="title">Translation Assistant</h1>
+    </header>
+
+    <!-- Sign-Up Form -->
+    <div id="signupForm" class="auth-form">
+      <h2>Sign Up</h2>
+      <input type="text" id="signupUsername" placeholder="Username" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <button id="signupBtn">Sign Up</button>
+      <p>Already have an account? <a href="#" id="showLogin">Log In</a></p>
+    </div>
+
+    <!-- Log-In Form -->
+    <div id="loginForm" class="auth-form" style="display: none;">
+      <h2>Log In</h2>
+      <input type="text" id="loginUsername" placeholder="Username" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button id="loginBtn">Log In</button>
+      <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+    </div>
+
+    <h2>VTT to Text Converter</h2>
+    <form id="vttForm">
+        <input type="file" id="vttFile" accept=".vtt">
+        <button type="button" onclick="convertVTT()">Convert</button>
+    </form>
+    <div id="convertedText"></div>
+  </div>
+</body>
+</html>
