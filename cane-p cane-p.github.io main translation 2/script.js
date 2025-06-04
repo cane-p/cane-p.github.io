@@ -192,10 +192,14 @@ function addCopyPasteFunctionality() {
       try {
         const text = await navigator.clipboard.readText();
         translationBox.value = text;
+        updateProgress();
       } catch (err) {
         alert('Failed to paste!');
       }
     });
+
+    // Update progress whenever the user types in the translation box
+    translationBox.addEventListener('input', updateProgress);
   });
 }
 
